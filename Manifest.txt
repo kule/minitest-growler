@@ -7,5 +7,7 @@ README.rdoc
 Rakefile
 lib/minitest/growler.rb
 lib/minitest/growler_plugin.rb
+lib/minitest/images/failure.png
+lib/minitest/images/success.png
 minitest-growler.gemspec
 test/minitest-growler_test.rb
