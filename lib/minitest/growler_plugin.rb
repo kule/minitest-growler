@@ -1,7 +1,7 @@
 require "minitest/test"
 require "growl"
 
-module MiniTest
+module Minitest
 
   def self.plugin_growler_options(opts, options)
   end

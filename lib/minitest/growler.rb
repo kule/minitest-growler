@@ -1,4 +1,4 @@
-gem "minitest"
+require "minitest"
 
-MiniTest.load_plugins
-MiniTest::Growler.growler!
+Minitest.load_plugins
+Minitest::Growler.growler!
