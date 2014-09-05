@@ -26,15 +26,18 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<growl>, ["~> 1.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 4.0"])
       s.add_development_dependency(%q<hoe>, ["~> 3.11"])
+      s.add_development_dependency(%q<mocha>, ["~> 1.1"])
     else
       s.add_dependency(%q<minitest>, ["~> 5.0"])
       s.add_dependency(%q<growl>, ["~> 1.0"])
       s.add_dependency(%q<rdoc>, ["~> 4.0"])
       s.add_dependency(%q<hoe>, ["~> 3.11"])
+      s.add_dependency(%q<mocha>, ["~> 1.1"])
     end
   else
     s.add_dependency(%q<growl>, ["~> 1.0"])
     s.add_dependency(%q<rdoc>, ["~> 4.0"])
     s.add_dependency(%q<hoe>, ["~> 3.11"])
+    s.add_dependency(%q<mocha>, ["~> 1.1"])
   end
 end

@@ -31,10 +31,14 @@ module Minitest
       super
 
       if failures.to_i > 0 || errors.to_i > 0
-        Growl.notify "Tests Failed! (#{failures.to_i} failures, #{errors.to_i} errors)", :image => image_path(:failure)
+        notify("Tests Failed! (#{failures.to_i} failures, #{errors.to_i} errors)", :failure)
       else
-        Growl.notify "Tests Passed! (#{assertions.to_i} assertions)", :image => image_path(:success)
+        notify("Tests Passed! (#{assertions.to_i} assertions)", :success)
       end
+    end
+
+    def notify(message, image_type)
+      Growl.notify(message, :image => image_path(image_type))
     end
 
     def image_path(type)
