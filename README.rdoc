@@ -2,6 +2,11 @@
 
 Growl Notifications for MiniTest 5+
 
+== Prerequisites
+
+* Growl - {http://growl.info/downloads}[http://growl.info/downloads]
+* After installing Growl also install GrowlNotify - {http://growl.info/downloads}[http://growl.info/downloads] (scroll down to the General Downloads section)
+
 == Install
 
     gem install minitest-growler
