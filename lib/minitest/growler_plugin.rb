@@ -13,7 +13,7 @@ module Minitest
   end
 
   class Growler < StatisticsReporter
-    VERSION = "5.1.0"
+    VERSION = "1.0.0"
 
     def self.growler!
       @growler = true
