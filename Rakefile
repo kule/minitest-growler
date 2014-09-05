@@ -1,23 +1,51 @@
-# -*- ruby -*-
+# encoding: utf-8
 
 require 'rubygems'
-require 'hoe'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
+require 'rake'
 
-Hoe.plugin :gemspec  # `gem install hoe-gemspec`
-Hoe.plugin :git      # `gem install hoe-git`
-Hoe.plugin :minitest # `gem install hoe-minitest`
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
+  gem.name = "minitest-growler"
+  gem.homepage = "http://github.com/kule/minitest-growler"
+  gem.license = "MIT"
+  gem.summary = "Growl Notifications for MiniTest v5+"
+  gem.description = "Growl Notifications for MiniTest v5+"
+  gem.email = "kulehandluke@gmail.com"
+  gem.authors = ["Luke Pearce"]
+  # dependencies defined in Gemfile
+end
+Jeweler::RubygemsDotOrgTasks.new
 
-Hoe.spec 'minitest-growler' do
-  developer 'Luke Pearce', 'kulehandluke@gmail.com'
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.verbose = true
+end
 
-  self.summary     = 'Growl Notifications for MiniTest 5+'
-  self.description = 'Growl Notifications for Minitest 5+'
-  self.urls        = ['http://github.com/kule/minitest-growler']
-  self.license       "MIT"
+desc "Code coverage detail"
+task :simplecov do
+  ENV['COVERAGE'] = "true"
+  Rake::Task['test'].execute
+end
 
-  self.readme_file       = 'README.rdoc'
-  self.history_file      = 'CHANGELOG.rdoc'
+task :default => :test
 
-  dependency 'minitest',  '~> 5.0'
-  dependency 'growl',     '~> 1.0'
+require 'rdoc/task'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "minitest-growler #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end

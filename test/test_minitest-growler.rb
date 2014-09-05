@@ -1,7 +1,4 @@
-gem "minitest"
-require 'minitest/autorun'
-require 'minitest/growler'
-require "mocha/mini_test"
+require 'helper'
 
 describe 'minitest-growler' do
   before do
@@ -22,14 +19,14 @@ describe 'minitest-growler' do
     @reporter.errors = 0
     @reporter.report
   end
-  it "growls red a test errors" do
+  it "growls red when a test errors" do
     @reporter.expects(:notify).with("Tests Failed! (0 failures, 1 errors)", :failure)
     @reporter.assertions = 2
     @reporter.failures = 0
     @reporter.errors = 1
     @reporter.report
   end
-  it "growls red tests fail and error" do
+  it "growls red when tests fail and error" do
     @reporter.expects(:notify).with("Tests Failed! (2 failures, 3 errors)", :failure)
     @reporter.assertions = 15
     @reporter.failures = 2
