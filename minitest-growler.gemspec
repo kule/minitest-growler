@@ -26,11 +26,14 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "VERSION",
     "lib/minitest/growler.rb",
     "lib/minitest/growler_plugin.rb",
     "lib/minitest/images/failure.png",
     "lib/minitest/images/success.png",
-    "minitest-growler.gemspec"
+    "minitest-growler.gemspec",
+    "test/helper.rb",
+    "test/test_minitest-growler.rb"
   ]
   s.homepage = "http://github.com/kule/minitest-growler"
   s.licenses = ["MIT"]
