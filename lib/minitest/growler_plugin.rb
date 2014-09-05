@@ -8,18 +8,12 @@ module Minitest
 
   def self.plugin_growler_init(options)
     if Growler.growler?
-      io = Growler.new(options[:io])
-
-      self.reporter.reporters.grep(Minitest::Reporter).each do |rep|
-        rep.io = io
-      end
+      self.reporter << Growler.new(options)
     end
   end
 
-  class Growler
+  class Growler < StatisticsReporter
     VERSION = "5.1.0"
-
-    attr_reader :io
 
     def self.growler!
       @growler = true
@@ -29,28 +23,18 @@ module Minitest
       @growler ||= false
     end
 
-    def initialize(io)
-      @io = io
+    def initialize(options)
+      super
     end
 
-    def puts(o = nil)
-      return io.puts if o.nil?
+    def report
+      super
 
-      if o =~ /(\d+) assertions, (\d+) failures, (\d+) errors/
-        assertions, failures, errors = $1, $2, $3
-        if failures != '0' || errors != '0'
-          Growl.notify "Tests Failed! (#{failures} failures, #{errors} errors)", :image => image_path(:failure)
-        else
-          Growl.notify "Tests Passed! (#{assertions} assertions)", :image => image_path(:success)
-        end
+      if failures.to_i > 0 || errors.to_i > 0
+        Growl.notify "Tests Failed! (#{failures.to_i} failures, #{errors.to_i} errors)", :image => image_path(:failure)
+      else
+        Growl.notify "Tests Passed! (#{assertions.to_i} assertions)", :image => image_path(:success)
       end
-
-      io.puts o
-    end
-
-    def method_missing(msg, *args)
-      return super unless io.respond_to?(msg)
-      io.send(msg, *args)
     end
 
     def image_path(type)
